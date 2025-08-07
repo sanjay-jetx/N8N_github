@@ -1,0 +1,141 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 8
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -140,
+        -120
+      ],
+      "id": "6553f121-b295-4c05-8836-dc6e8baed0e2",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1jZ8ZwDCe_fM8afdMyzRbtp7-JIccMMpU2u3KP-G8KG4",
+          "mode": "list",
+          "cachedResultName": "student_1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1jZ8ZwDCe_fM8afdMyzRbtp7-JIccMMpU2u3KP-G8KG4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1778202181,
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1jZ8ZwDCe_fM8afdMyzRbtp7-JIccMMpU2u3KP-G8KG4/edit#gid=1778202181"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.6,
+      "position": [
+        80,
+        -120
+      ],
+      "id": "ac734d14-7393-44c7-8855-e5836ad92821",
+      "name": "Google Sheets",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "V0xORuHgnPIwYVfK",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Set target date to compare (8th August 2025)\nconst targetDate = \"2025-08-08\";\n\n// Filter items with Due Date before the target date\nreturn items.filter(item => {\n  const dueDate = item.json[\"Due Date\"];\n  return dueDate < targetDate;\n});\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        360,
+        -120
+      ],
+      "id": "62e96fdb-ea3a-4bee-870f-f8e2d20c9124",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json.Email }}",
+        "subject": "payment reminder",
+        "emailType": "text",
+        "message": "=Hi {{ $json[\"Name\"] }}, This is a reminder that your fee is due today ({{ $json[\"Due Date\"] }}). Please make the payment at your earliest convenience.  Regards, Accounts Team",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        620,
+        -120
+      ],
+      "id": "e27996a6-a114-47d0-b77b-911c425d63b5",
+      "name": "Gmail",
+      "webhookId": "d1867e47-fae8-4c6a-8c7d-d523473303b1",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "nHHkMFNgxgspDIMo",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Google Sheets",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheets": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "Gmail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "3d7c715b-503a-4069-a33e-a429c0fbf115",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "1ba88dcd90667cee2299243afd88a40d71eb15edb54b06835a499205823ef451"
+  },
+  "id": "9jq9gY57KvuNzUfk",
+  "tags": []
+}
