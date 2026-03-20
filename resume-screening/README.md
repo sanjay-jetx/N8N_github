@@ -15,6 +15,7 @@ The system helps HR teams quickly analyze candidates based on job requirements.
    - Strengths
    - Weaknesses
 5. The results are stored in an Excel sheet.
+<img width="1853" height="817" alt="Screenshot 2026-03-20 105043" src="https://github.com/user-attachments/assets/8fc4e665-09e2-4b11-8c7f-360eac1e950f" />
 
 ## 📊 Output (Excel Data)
 The system automatically generates structured data including:
@@ -31,6 +32,7 @@ The system automatically generates structured data including:
 - AI Agent (OpenAI / LLM)
 - Excel / Google Sheets
 - JSON-based workflow
+<img width="1875" height="846" alt="Screenshot 2026-03-20 105123" src="https://github.com/user-attachments/assets/d379fd84-29c2-4ae9-aef0-d600c596def1" />
 
 ## 🎯 Use Case
 - Automates resume filtering
