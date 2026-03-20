@@ -1,0 +1,122 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -192,
+        -48
+      ],
+      "id": "265a47cf-c9f5-47d6-aea6-552d8489de62",
+      "name": "Telegram Trigger",
+      "webhookId": "966bce88-79d3-4c71-be66-9587e347014b",
+      "credentials": {
+        "telegramApi": {
+          "id": "sQUB4DbwIjHYP5rc",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-3.5-turbo",
+          "mode": "list",
+          "cachedResultName": "GPT-3.5-TURBO"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=You are a helpful chatbot, part of \"The AI Dude\" 🤖, replying to AI-related questions in a fun, engaging, emoji-filled way. Use the incoming message text ({{$json.message.text}}) as the query to respond to."
+            }
+          ]
+        },
+        "options": {
+          "temperature": 0.7
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        -32,
+        -48
+      ],
+      "id": "518843f4-a82d-4b5e-93e5-024e032b8fe5",
+      "name": "Message a model",
+      "credentials": {
+        "openAiApi": {
+          "id": "qcpCPlJXIanxKM9a",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('Telegram Trigger').item.json.message.from.id }}",
+        "text": "={{ $json.message.content }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        288,
+        -32
+      ],
+      "id": "5cbeb56d-98f2-4678-888e-cf1695c86683",
+      "name": "Send a text message",
+      "webhookId": "26688b07-d24c-4cd5-8d07-8c4f2ceac75e",
+      "credentials": {
+        "telegramApi": {
+          "id": "sQUB4DbwIjHYP5rc",
+          "name": "Telegram account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Send a text message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "2212760c-7491-4705-8290-ac9bde6eebfe",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "52ec1480308a78b9f1c9c7d9654d4a85819c26b33a32f5c27d472a462f102f45"
+  },
+  "id": "RmprYiLF5RjpXVtr",
+  "tags": []
+}
