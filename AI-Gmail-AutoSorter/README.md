@@ -3,6 +3,7 @@ Your Personal AI Inbox Assistant 📨🤖
 
 > ✨ **Let AI manage your inbox!**  
 Automatically sorts, labels, and drafts replies for Gmail — so you focus only on what matters.
+<img width="1920" height="1032" alt="image" src="https://github.com/user-attachments/assets/dc01f3f5-9aee-46b4-bede-fb5739f2c76a" />
 
 ---
 
@@ -33,8 +34,8 @@ Automatically sorts, labels, and drafts replies for Gmail — so you focus only 
 
 ## 📸 Workflow Preview  
 
-![Workflow Screenshot](workflow.png)  
-*(Blur any personal info before uploading)*  
+<img width="1920" height="1032" alt="Screenshot 2026-03-20 144037" src="https://github.com/user-attachments/assets/769247a7-1a10-42a7-83b9-fa87d8144676" />
+
 
 ---
 
